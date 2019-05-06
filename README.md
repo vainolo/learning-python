@@ -632,7 +632,7 @@ hello
 world
 ```
 
-Python does not support _data encapsulation_. Data inside a class instance can be accessed by any that has a handle to that instance.
+Python does not support _data encapsulation_. Data inside a class instance can be accessed by any that has a handle to that instance. By convention, if a class attribute's name start with `_` then this atribute should be treated as non-public and should not be used outside of the class. 
 
 Classes can be _inherited_. All attributes of the base class are available in the derived class. The derive class can also override attributes of the base class. It is possible to reference a method of the base class of a derived class using `BaseClass.method(self, arguments)`. When an attribute is referenced, it is searched in the instantiated class. If it doesn't exist there, the search is done recursively on base classes until found (or not).
 
@@ -661,7 +661,30 @@ Function f1 in C
 Function f1 in A
 ```
 
-Multiple inheritance is supported using `class A(X, Y, Z):`. I won't get into more details here because if you are using multiple inheritance you either know what you are doing, or you should not be using multiple inheritance. 
+Multiple inheritance is supported using `class A(X, Y, Z):`. I won't get into more details here because if you are using multiple inheritance you either know what you are doing, or you should not be using multiple inheritance.
+
+## Iterators & Generator
+
+An iterator is a class that defines a `next(self)` function that returns instances one at a time and when there are no elements to return throws a `StopIteration` exception. Iterators are widely used in Python.
+
+Another way to create an iterator is to define a `Generator`, which is a function that contains a `yield` expression that gives the current value of the iterator. A basic use of a `Generator` is when you want to iterate over a collection of elements with _lazy loading_, for example when working against a database.
+
+```python
+>>> def my_generator(start, end, multiplier):
+...     local = start
+...     while(local < end):
+...             yield local
+...             local = local * multiplier
+...
+>>>
+>>> for i in my_generator(1,10,2):
+...     print i
+...
+1
+2
+4
+8
+```
 
 ## Built-in Functions
 
